@@ -13,6 +13,28 @@ module.exports = {
     const { app } = this;
     return app.jwt.sign(info, app.config.jwt.secret);
   },
+  getWhereSql({ fileds }) {
+    if (!Array.isArray(fileds)) {
+      fileds = [ fileds ];
+    }
+    let where = { is_delete: 0 };
+    const orSql = [];
+    const { app, ctx } = this;
+    const Op = app.Sequelize.Op;
+    const params = { ...ctx.request.body, ...ctx.params, ...ctx.query };
+    fileds.forEach(element => {
+      if (params[element]) {
+        orSql.push({ [element]: { [Op.like]: '%' + params[element] + '%' } });
+      }
+    });
+    if (orSql.length) {
+      where = {
+        ...where,
+        [Op.or]: orSql,
+      };
+    }
+    return where;
+  },
 };
 // ctx.helper.responseSuccessHelper({ data = null, msg = null, code = 200 });
 // ctx.helper.responseErrorHelper({ data = null, msg = null, code = 200 });

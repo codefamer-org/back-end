@@ -3,18 +3,14 @@
 module.exports = app => {
   const { STRING, INTEGER, DATE } = app.Sequelize;
 
-  const User = app.model.define('user', {
+  const Article = app.model.define('article', {
     id: { type: INTEGER, primaryKey: true, autoIncrement: true },
-    name: { type: STRING(255), default: null },
-    mobile: STRING(255),
-    password: STRING(255),
-    email: STRING(255),
-    avatar: STRING(255),
+    title: STRING,
+    html: STRING,
+    markdown: STRING,
+    desc: STRING,
     create_user: STRING(255),
     update_user: STRING(255),
-    user_id: STRING(255),
-    age: INTEGER,
-    sex: INTEGER,
     is_delete: INTEGER,
     created_at: DATE,
     updated_at: DATE,
@@ -27,9 +23,9 @@ module.exports = app => {
     // timestamps: false, // 去除createAt updateAt
     // createdAt: false, // 表示不启用created_at
     // updatedAt: false, // 表示不启用updated_at
-    tableName: 'user', // 自定义的表名，也可以不写，直接用define后面的也可以
+    tableName: 'article', // 自定义的表名，也可以不写，直接用define后面的也可以
     // 只要你使用了freezeTableName，程序就不会自动给你加上s了
   });
 
-  return User;
+  return Article;
 };
