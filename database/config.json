@@ -1,0 +1,25 @@
+{
+  "development": {
+    "username": "root",
+    "password": "LuJun=940424",
+    "database": "codefarmer",
+    "host": "54.210.95.145",
+    "dialect": "mysql",
+    "port": 3306,
+    "timezone": "+08:00"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
