@@ -11,7 +11,7 @@ function toInt(str) {
 class ArticleController extends Controller {
   async index() {
     const { ctx } = this;
-    const { limit, offset } = ctx.query;
+    const { page, size } = ctx.query;
     // const Op = this.app.Sequelize.Op;
     try {
       const data = await ctx.model.Article.findAndCountAll({
@@ -20,8 +20,8 @@ class ArticleController extends Controller {
         order: [
           [ 'created_at', 'DESC' ],
         ],
-        offset: (parseInt(offset) - 1) * parseInt(limit), // 每页起始位置
-        limit: parseInt(limit),
+        offset: (toInt(page) - 1) * toInt(size), // 每页起始位置
+        limit: toInt(size),
       });
       if (!data) {
         ctx.helper.responseSuccessHelper({ msg: '未获取到数据' });

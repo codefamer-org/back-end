@@ -6,6 +6,7 @@ module.exports = secret => {
     const ingoreTokenApi = [
       '/user/login',
       '/api/user/login',
+      '/api/common/getQiNiuToken',
     ];
     if (ingoreTokenApi.includes(url) && method.toLocaleUpperCase() === 'POST') {
       await next();
