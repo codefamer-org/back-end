@@ -1,7 +1,7 @@
 'use strict';
 
-module.exports = app => {
-  const { router, controller } = app;
-  router.post('/api/user/login', controller.user.login);
-  router.resources('user', '/api/user', controller.user);
+module.exports = (app) => {
+  const { router, controller, middleware } = app;
+  const jwt = middleware.verifyToken(app.config.jwt.secret);
+  router.resources('user', '/api/user', jwt, controller.user);
 };

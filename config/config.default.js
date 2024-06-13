@@ -5,7 +5,7 @@ module.exports = appInfo => {
 
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_{{keys}}';
-
+  config.baseDir = ''
   // add your config here
   config.middleware = [];
 
@@ -51,13 +51,18 @@ module.exports = appInfo => {
 
   config.jwt = {
     secret: 'LuJun=940424',
-    // enable: true, // default is false
+    enable: true, // default is false
+    match: '/jwt', // optional
     // expiresIn: '24h',
     // sign: {
     //   // 多少s后过期。actionToken.js中,jwt.sing(plyload,secret,{expiresIn:number})会被合并，调用时设置优先级更高;
     //   // expiresIn: 8 * (60 * 60),
     // },
   };
+
+  config.multipart = {
+    fileExtensions: [ '.apk', '.pptx', '.docx', '.csv', '.doc', '.ppt', '.pdf', '.pages', '.wav', '.mov' ], // 增加对 .apk 扩展名的支持
+  },
 
   // 允许跨域的方法
   config.cors = {
@@ -68,7 +73,6 @@ module.exports = appInfo => {
 
   // 中间件
   config.middleware = [ 'errorHandler' ];
-  config.middleware = [ 'verifyToken' ];
   config.errorHandler = {
     // ceshi: 123,
     // 通用配置（以下是重点）

@@ -10,7 +10,11 @@
     "egg-sequelize": "^4.0.2",
     "egg-validate": "^2.0.2",
     "mysql2": "^3.9.9",
-    "qiniu": "^7.12.0"
+    "qiniu": "^7.12.0",
+    "stream-to-array": "^2.3.0",
+    "stream-wormhole": "^1.0.3",
+    "await-stream-ready": "^1.0.1",
+    "image-downloader": "^3.3.0"
   },
   "devDependencies": {
     "autod": "^3.0.1",

@@ -7,3 +7,24 @@
 2024-05-31 00:25:54,131 INFO 16352 [egg-schedule]: register schedule D:\project\codefarmer-end\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
 2024-05-31 00:25:54,131 INFO 16352 [egg-schedule]: register schedule D:\project\codefarmer-end\node_modules\egg-logrotator\app\schedule\clean_log.js
 2024-05-31 00:25:54,131 INFO 16352 [egg-schedule]: register schedule D:\project\codefarmer-end\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2024-06-13 22:06:02,877 INFO 8568 [egg-schedule]: register schedule D:\project\codefamer-org\back-end\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2024-06-13 22:06:02,877 INFO 8568 [egg-schedule]: register schedule D:\project\codefamer-org\back-end\node_modules\egg-logrotator\app\schedule\clean_log.js
+2024-06-13 22:06:02,877 INFO 8568 [egg-schedule]: register schedule D:\project\codefamer-org\back-end\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2024-06-13 22:06:03,948 INFO 13608 [egg-schedule]: register schedule D:\project\codefamer-org\back-end\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2024-06-13 22:06:03,948 INFO 13608 [egg-schedule]: register schedule D:\project\codefamer-org\back-end\node_modules\egg-logrotator\app\schedule\clean_log.js
+2024-06-13 22:06:03,948 INFO 13608 [egg-schedule]: register schedule D:\project\codefamer-org\back-end\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2024-06-13 22:06:07,347 INFO 10340 [Timer] D:\project\codefamer-org\back-end\node_modules\egg-multipart\app\schedule\clean_tmpdir.js next time will execute after 23032657ms at 2024-06-14 04:30:00.004
+2024-06-13 22:06:07,347 INFO 10340 [Timer] D:\project\codefamer-org\back-end\node_modules\egg-logrotator\app\schedule\clean_log.js next time will execute after 6832653ms at 2024-06-14 00:00:00.000
+2024-06-13 22:06:07,347 INFO 10340 [Timer] D:\project\codefamer-org\back-end\node_modules\egg-logrotator\app\schedule\rotate_by_file.js next time will execute after 6833653ms at 2024-06-14 00:00:01.000
+2024-06-13 22:06:46,014 INFO 14352 [egg-schedule]: register schedule D:\project\codefamer-org\back-end\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2024-06-13 22:06:46,014 INFO 14352 [egg-schedule]: register schedule D:\project\codefamer-org\back-end\node_modules\egg-logrotator\app\schedule\clean_log.js
+2024-06-13 22:06:46,014 INFO 14352 [egg-schedule]: register schedule D:\project\codefamer-org\back-end\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2024-06-13 22:06:55,212 INFO 12940 [egg-schedule]: register schedule D:\project\codefamer-org\back-end\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2024-06-13 22:06:55,212 INFO 12940 [egg-schedule]: register schedule D:\project\codefamer-org\back-end\node_modules\egg-logrotator\app\schedule\clean_log.js
+2024-06-13 22:06:55,212 INFO 12940 [egg-schedule]: register schedule D:\project\codefamer-org\back-end\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2024-06-13 22:07:13,054 INFO 14720 [egg-schedule]: register schedule D:\project\codefamer-org\back-end\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2024-06-13 22:07:13,054 INFO 14720 [egg-schedule]: register schedule D:\project\codefamer-org\back-end\node_modules\egg-logrotator\app\schedule\clean_log.js
+2024-06-13 22:07:13,054 INFO 14720 [egg-schedule]: register schedule D:\project\codefamer-org\back-end\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2024-06-13 22:07:28,021 INFO 14152 [egg-schedule]: register schedule D:\project\codefamer-org\back-end\node_modules\egg-multipart\app\schedule\clean_tmpdir.js
+2024-06-13 22:07:28,021 INFO 14152 [egg-schedule]: register schedule D:\project\codefamer-org\back-end\node_modules\egg-logrotator\app\schedule\clean_log.js
+2024-06-13 22:07:28,022 INFO 14152 [egg-schedule]: register schedule D:\project\codefamer-org\back-end\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
