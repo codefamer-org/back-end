@@ -4,7 +4,7 @@ const Controller = require('egg').Controller;
 
 class SsoController extends Controller {
   async login() {
-    
+
     const { ctx, app } = this;
     const { name, password } = ctx.request.body;
 
@@ -27,7 +27,7 @@ class SsoController extends Controller {
       if (!usersinfo) {
         ctx.helper.responseSuccessHelper({ msg: '用户名或密码错误' });
       } else {
-        ctx.helper.responseSuccessHelper({ data: ctx.helper.getToken({ id: usersinfo.id }) });
+        ctx.helper.responseSuccessHelper({ data: ctx.helper.getToken(usersinfo) });
       }
     } catch (error) {
       ctx.helper.responseErrorHelper({ msg: error || '出错了' });

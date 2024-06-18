@@ -9,6 +9,26 @@ function toInt(str) {
 }
 
 class ArticleController extends Controller {
+  async getAll() {
+    const { ctx } = this;
+    // const Op = this.app.Sequelize.Op;
+    try {
+      const data = await ctx.model.Article.findAndCountAll({
+        attributes: [ 'id', 'title', 'desc' ],
+        order: [
+          [ 'created_at', 'DESC' ],
+        ],
+      });
+      if (!data) {
+        ctx.helper.responseSuccessHelper({ msg: '未获取到数据' });
+      } else {
+        ctx.helper.responseSuccessHelper({ data });
+      }
+    } catch (error) {
+      ctx.helper.responseErrorHelper({ msg: '获取数据出错了' });
+    }
+  }
+
   async index() {
     const { ctx } = this;
     const { page, size } = ctx.query;

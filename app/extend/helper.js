@@ -11,7 +11,8 @@ module.exports = {
   },
   getToken(info) {
     const { app } = this;
-    return app.jwt.sign(info, app.config.jwt.secret);
+    const { name, mobile, password, email, user_id, id } = info || {};
+    return app.jwt.sign({name, mobile, password, email, user_id, id}, app.config.jwt.secret);
   },
   getWhereSql({ fileds }) {
     if (!Array.isArray(fileds)) {

@@ -7,7 +7,8 @@ module.exports = secret => {
     if (token !== 'null' && token) {
     // 有 token 需要校验
       try {
-        await ctx.app.jwt.verify(token, secret);
+        const data = await ctx.app.jwt.verify(token, secret);
+        console.log('DADADSA', data);
         await next();
       } catch (error) {
         ctx.helper.responseSuccessHelper({ msg: 'token已过期，请重新登录', code: 401 });
