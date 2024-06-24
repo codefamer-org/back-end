@@ -8,14 +8,14 @@ function toInt(str) {
   return parseInt(str, 10) || 0;
 }
 
-class ArticleController extends Controller {
+class CategoryController extends Controller {
   async getAll() {
     const { ctx } = this;
     // const Op = this.app.Sequelize.Op;
     try {
-      const data = await ctx.model.Article.findAndCountAll({
-        where: ctx.helper.getWhereSql({ fileds: ['title', 'category']}),
-        attributes: [ 'id', 'title', 'desc', 'category' ],
+      const data = await ctx.model.Category.findAndCountAll({
+        where: ctx.helper.getWhereSql({ fileds: ['label', 'type'] }),
+        attributes: [ 'label', 'value', 'type' ],
         order: [
           [ 'created_at', 'DESC' ],
         ],
@@ -26,7 +26,6 @@ class ArticleController extends Controller {
         ctx.helper.responseSuccessHelper({ data });
       }
     } catch (error) {
-      console.log('ADSAD', error);
       ctx.helper.responseErrorHelper({ msg: '获取数据出错了' });
     }
   }
@@ -36,8 +35,8 @@ class ArticleController extends Controller {
     const { page, size } = ctx.query;
     // const Op = this.app.Sequelize.Op;
     try {
-      const data = await ctx.model.Article.findAndCountAll({
-        where: ctx.helper.getWhereSql({ fileds: ['title', 'category']}),
+      const data = await ctx.model.Category.findAndCountAll({
+        where: ctx.helper.getWhereSql({ fileds: ['label', 'type'] }),
         // attributes: [ 'id', 'name', 'sex' ],
         order: [
           [ 'created_at', 'DESC' ],
@@ -58,7 +57,7 @@ class ArticleController extends Controller {
   async show() {
     const { ctx } = this;
     try {
-      const data = await ctx.model.Article.findOne({
+      const data = await ctx.model.Category.findOne({
         where: { id: ctx.params.id, is_delete: 0 },
       });
       if (!data) {
@@ -73,19 +72,20 @@ class ArticleController extends Controller {
 
   async create() {
     const { ctx, app } = this;
-    const { title, markdown, html, desc, category } = ctx.request.body;
+    const { label, value, type } = ctx.request.body;
     // 校验输入参数
     const rules = {
-      title: { type: 'string', required: true, desc: '文章标题不能为空' },
-      markdown: { type: 'string', required: true, desc: '文章内容不能为空' },
+      label: { type: 'string', required: true, desc: '名称不能为空' },
+      value: { type: 'string', required: true, desc: '值不能为空' },
+      type: { type: 'string', required: true, desc: '类型不能为空' },
     };
     const errors = app.validator.validate(rules, ctx.request.body);
     if (errors && errors.length) {
-      ctx.helper.responseSuccessHelper({ msg: '文章标题或文章内容不能为空' });
+      ctx.helper.responseSuccessHelper({ msg: '参数校验失败' });
       return;
     }
     try {
-      await ctx.model.Article.create({ title, markdown, html, desc, category });
+      await ctx.model.Category.create({ label, value, type });
       ctx.helper.responseSuccessHelper({});
     } catch (error) {
       ctx.helper.responseErrorHelper({ msg: error || '出错了' });
@@ -95,24 +95,25 @@ class ArticleController extends Controller {
   async update() {
     const { ctx, app } = this;
     const id = toInt(ctx.params.id);
-    const data = await ctx.model.Article.findByPk(id);
+    const data = await ctx.model.Category.findByPk(id);
     if (!data) {
-      ctx.helper.responseSuccessHelper({ msg: '文章不存在' });
+      ctx.helper.responseSuccessHelper({ msg: '数据不存在' });
       return;
     }
-    const { title, markdown, html, category } = ctx.request.body;
+    const { label, value, type } = ctx.request.body;
     // 校验输入参数
     const rules = {
-      title: { type: 'string', required: true, desc: '文章标题不能为空' },
-      markdown: { type: 'string', required: true, desc: '文章内容不能为空' },
+      label: { type: 'string', required: true, desc: '名称不能为空' },
+      value: { type: 'string', required: true, desc: '值不能为空' },
+      type: { type: 'string', required: true, desc: '类型不能为空' },
     };
     const errors = app.validator.validate(rules, ctx.request.body);
     if (errors && errors.length) {
-      ctx.helper.responseSuccessHelper({ msg: '文章标题或文章内容不能为空' });
+      ctx.helper.responseSuccessHelper({ msg: '参数校验失败' });
       return;
     }
     try {
-      await data.update({ title, markdown, html, category });
+      await data.update({ label, value, type });
       ctx.helper.responseSuccessHelper({});
     } catch (error) {
       ctx.helper.responseErrorHelper({ msg: error || '出错了' });
@@ -123,7 +124,7 @@ class ArticleController extends Controller {
     const ctx = this.ctx;
     const id = toInt(ctx.params.id);
     try {
-      const result = await ctx.model.Article.findByPk(id);
+      const result = await ctx.model.Category.findByPk(id);
       if (!result) {
         ctx.helper.responseSuccessHelper({ msg: '操作失败' });
       } else {
@@ -136,4 +137,4 @@ class ArticleController extends Controller {
   }
 }
 
-module.exports = ArticleController;
+module.exports = CategoryController;

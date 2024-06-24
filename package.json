@@ -1,5 +1,5 @@
 {
-  "name": "codefarmer-end",
+  "name": "icodeicode-end",
   "version": "1.0.0",
   "description": "",
   "dependencies": {
@@ -30,9 +30,11 @@
     "node": ">=8.0.0"
   },
   "scripts": {
-    "dev": "egg-bin dev",
-    "start": "egg-scripts start --daemon --title=codefarmer-end",
-    "stop": "egg-scripts stop --title=codefarmer-end",
+    "dev": "egg-bin dev --port=8080",
+    "start:amazon": "egg-scripts start --daemon --title=icodeicode-end --env=amazon --port=8080",
+    "start:huawei": "egg-scripts start --daemon --title=icodeicode-end --env=huawei --port=8080",
+    "start": "egg-scripts start --daemon --title=icodeicode-end",
+    "stop": "egg-scripts stop --title=icodeicode-end",
     "sequelize-cli-ts": "node -r ts-node/register ./node_modules/sequelize-cli/lib/sequelize",
     "autod": "autod",
     "lint": "eslint .",
