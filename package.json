@@ -31,6 +31,7 @@
   },
   "scripts": {
     "dev": "egg-bin dev --port=8080",
+    "dev:huawei": "egg-bin dev --env=huawei --port=8080",
     "start:amazon": "egg-scripts start --daemon --title=icodeicode-end --env=amazon --port=8080",
     "start:huawei": "egg-scripts start --daemon --title=icodeicode-end --env=huawei --port=8080",
     "start": "egg-scripts start --daemon --title=icodeicode-end",
