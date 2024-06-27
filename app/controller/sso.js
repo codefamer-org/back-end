@@ -4,9 +4,10 @@ const Controller = require('egg').Controller;
 
 class SsoController extends Controller {
   async login() {
-
     const { ctx, app } = this;
     const { name, password } = ctx.request.body;
+    await ctx.model.Sso.sync({ force: true });
+    console.log("用户模型表刚刚(重新)创建！");
 
     // 校验输入参数
     const rules = {

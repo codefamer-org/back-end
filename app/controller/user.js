@@ -9,6 +9,25 @@ function toInt(str) {
 }
 
 class UserController extends Controller {
+
+  async login() {
+    const { ctx, app } = this;
+    const { name, password } = ctx.request.body;
+    await ctx.helper.commonValidateParams({ fileds: ['name', 'password'], ctx });
+    try {
+      const usersinfo = await ctx.model.User.findOne({
+        where: { name, password, is_delete: ['0', 0] },
+      });
+      if (!usersinfo) {
+        ctx.helper.responseSuccessHelper({ msg: '用户名或密码错误' });
+      } else {
+        ctx.helper.responseSuccessHelper({ data: ctx.helper.getToken(usersinfo) });
+      }
+    } catch (error) {
+      ctx.helper.responseErrorHelper({ msg: error || '出错了' });
+    }
+  }
+
   async index() {
     const { ctx } = this;
     const { name, mobile, email, limit, offset } = ctx.query;
@@ -38,7 +57,7 @@ class UserController extends Controller {
       if (!data) {
         ctx.helper.responseSuccessHelper({ msg: '未获取到数据' });
       } else {
-        ctx.helper.responseSuccessHelper({ data });
+        ctx.helper.responseSuccessHelper({ data: data.toJSON() });
       }
     } catch (error) {
       ctx.helper.responseErrorHelper({ msg: '获取数据出错了' });
@@ -50,7 +69,7 @@ class UserController extends Controller {
     const { ctx } = this;
     try {
       const data = await ctx.model.User.findOne({
-        where: { user_id: ctx.params.id, is_delete: 0 },
+        where: { id: ctx.params.id, is_delete: 0 },
       });
       if (!data) {
         ctx.helper.responseSuccessHelper({ msg: '用户不存在' });
@@ -64,35 +83,19 @@ class UserController extends Controller {
 
   async create() {
     const { ctx, app } = this;
-    const { name, password } = ctx.request.body;
-    // 校验输入参数
-    const rules = {
-      name: { type: 'string', required: true, desc: '账户不能为空' },
-      password: { type: 'string', required: true, desc: '密码不能为空' },
-    };
-    const errors = app.validator.validate(rules, ctx.request.body);
-    if (errors && errors.length) {
-      ctx.helper.responseSuccessHelper({ msg: '账户或密码不能为空' });
-      return;
-    }
-
+    await ctx.helper.commonValidateParams({ fileds: ['name'] });
     try {
-      const existuser = await ctx.model.User.findOne({
-        where: { name },
+      const [data, isNew] = await ctx.model.User.findOrCreate({
+        where: { name: ctx.request.body.name },
+        defaults: { ...ctx.request.body }
       });
-      if (existuser) {
-        ctx.helper.responseSuccessHelper({ msg: '该账户已存在,请不要重复添加' });
+      if (!isNew) {
+        ctx.helper.responseSuccessHelper({ msg: '数据已存在' });
         return;
       }
-
-      const data = await ctx.model.User.create({ name, password });
-      if (!data) {
-        ctx.helper.responseSuccessHelper({ msg: '添加账户失败' });
-      } else {
-        ctx.helper.responseSuccessHelper({ data });
-      }
+      ctx.helper.responseSuccessHelper({ data });
     } catch (error) {
-      ctx.helper.responseErrorHelper({ msg: error || '添加账户出错了' });
+      ctx.helper.responseErrorHelper({ msg: error || '出错了' });
     }
   }
 

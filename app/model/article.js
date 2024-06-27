@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = app => {
-  const { STRING, INTEGER, DATE } = app.Sequelize;
+  const { STRING, INTEGER, DATE, UUID } = app.Sequelize;
 
   const Article = app.model.define('article', {
     id: { type: INTEGER, primaryKey: true, autoIncrement: true },
@@ -24,6 +24,13 @@ module.exports = app => {
     is_delete: INTEGER,
     created_at: DATE,
     updated_at: DATE,
+    user_id: {
+      type: UUID,
+      references: {
+        model: 'User', // 引用的目标模型
+        key: 'id', // 引用的目标属性
+      },
+    },
   }, {
     timestamps: true, // 自动维护时间戳 [ created_at、updated_at ]
     // 使用自定义表名之后上面写的users就直接就是你的表名，如果不加的话，你就可以写user，但是自己的表名为users，程序会自动将s加上

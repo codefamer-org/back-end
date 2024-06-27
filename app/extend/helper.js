@@ -9,6 +9,25 @@ module.exports = {
     this.ctx.body = { data, msg, code };
     this.ctx.status = 200;
   },
+  async commonValidateParams({ fileds }) {
+    if (!Array.isArray(fileds)) {
+      fileds = [ fileds ];
+    }
+    const rules = {};
+    fileds?.forEach(item => {
+      rules[item] = {
+        type: 'string',
+        required: true,
+        desc: `【${item}】 参数不能为空`
+      }
+    })
+    const errors = await this.app.validator.validate(rules, this.ctx.request.body);
+    if (errors && errors.length) {
+      return Promise.reject({ msg: '参数有误', status: 200 })
+    } else {
+      return Promise.resolve()
+    }
+  },
   getToken(info) {
     const { app } = this;
     const { name, mobile, password, email, user_id, id } = info || {};
