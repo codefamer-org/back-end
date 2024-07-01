@@ -38,11 +38,14 @@ module.exports = {
     if (!str) return str;
     return parseInt(str, 10) || 0;
   },
-  getWhereSql({ fileds }) {
+  getWhereSql({ fileds, queryFileds }) {
     if (!Array.isArray(fileds)) {
       fileds = [ fileds ];
     }
-    let where = { is_delete: 0 };
+    if (!Array.isArray(queryFileds)) {
+      queryFileds = [ queryFileds ];
+    }
+    let where = { is_delete: ["0", 0] };
     const orSql = [];
     const { app, ctx } = this;
     const Op = app.Sequelize.Op;
@@ -57,6 +60,13 @@ module.exports = {
         }
       }
     });
+
+    queryFileds.forEach(element => {
+      if (params[element]) {
+        where[element] = params[element]
+      }
+    })
+
     if (orSql.length) {
       where = {
         ...where,
@@ -69,7 +79,6 @@ module.exports = {
         [Op.or]: inSql,
       };
     }
-    console.log('ADASDSAD', where);
     return where;
   },
 };

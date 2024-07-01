@@ -17,6 +17,16 @@ class UserController extends Controller {
     try {
       const usersinfo = await ctx.model.User.findOne({
         where: { name, password, is_delete: ['0', 0] },
+        // attributes: [[literal('COUNT(*) + 1'), 'customCount']] literal 自定义聚合函数或任何其他数据库原生函数
+        // attributes: [[col('price'), 'productPrice']], col('*')
+        // attributes: { include: ['name'], exclude: ['age'] },
+        // attributes: [[sequelize.fn('SUM', sequelize.col('quantity')), 'totalQuantity']],
+        // order: [['field1', 'ASC'], ['field2', 'DESC']],
+        // order: [['fieldName', 'ASC']],
+        // order: [['RelatedModel', 'fieldName', 'ASC']],
+        // group: ['age']
+        // distinct: true
+        // console.log('查询到的记录:', record.get({ plain: true }));
       });
       if (!usersinfo) {
         ctx.helper.responseSuccessHelper({ msg: '用户名或密码错误' });

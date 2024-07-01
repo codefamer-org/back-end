@@ -3,9 +3,11 @@
 // app/middleware/error_handler.js
 module.exports = (option, app) => {
   return async function errorHandler(ctx, next) {
+    console.log('adsads', ctx);
     try {
       await next();
     } catch (err) {
+    console.log('adsads-err', err);
       // 所有的异常都在 app 上触发一个 error 事件，框架会记录一条错误日志
       ctx.app.emit('error', err, ctx);
 

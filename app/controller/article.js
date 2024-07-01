@@ -59,7 +59,35 @@ class ArticleController extends Controller {
     const { ctx } = this;
     try {
       const data = await ctx.model.Article.findOne({
-        where: { id: ctx.params.id, is_delete: 0 },
+        where: ctx.helper.getWhereSql({ queryFileds: ['id']}),
+        attributes: {
+          exclude: ['create_user_id', 'update_user_id'],
+          include: []
+        },
+        include: [
+          {
+            model: this.ctx.model.User,
+            as: 'create_user_info',
+            // required: !!userName,
+            attributes: ['name', 'id'],
+          },
+          {
+            model: this.ctx.model.User,
+            as: 'update_user_info',
+            // required: !!userName,
+            attributes: ['name', 'id'],
+          },
+          // {
+          //   model: this.ctx.model.Tasks,
+          //   as: 'tasks',
+          // },
+          // {
+          //   model: this.ctx.model.Groups,
+          //   as: 'groups',
+          //   // 配置 groups 元素输出 name,desc 字段
+          //   attributes: ['name', 'desc'],
+          // }
+        ],
       });
       if (!data) {
         ctx.helper.responseSuccessHelper({ msg: '不存在该资源' });

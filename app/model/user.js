@@ -11,7 +11,9 @@ module.exports = app => {
       unique: true,
       // autoIncrement: true,
       allowNull: false,
+      // defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       // default: UUIDV4,
+      // field: 'first_name', // 指定数据库对应的列名
       defaultValue: () => {
         return uuidv4().replace(/-/g, '');
       },
@@ -67,14 +69,14 @@ module.exports = app => {
       allowNull: false,
       defaultValue: '0',
       comment: '是否删除',
-      get() {
-        const is_delete = this.getDataValue('is_delete');
-        // 'this' 允许你访问实例的属性
-        return Number(is_delete);
-      },
-      set() {
-        this.setDataValue('is_delete', Number(is_delete))
-      },
+      // get() {
+      //   const is_delete = this.getDataValue('is_delete');
+      //   // 'this' 允许你访问实例的属性
+      //   return Number(is_delete);
+      // },
+      // set() {
+      //   this.setDataValue('is_delete', Number(is_delete))
+      // },
     },
     created_at: {
       type: DATE,
@@ -105,5 +107,30 @@ module.exports = app => {
     tableName: 'user', // 自定义的表名，也可以不写，直接用define后面的也可以
     // 只要你使用了freezeTableName，程序就不会自动给你加上s了
   });
+  // User.associate = function () {
+  //   // 与用户是 多对一
+  //   // app.model.Article.belongsTo(app.model.Users, {
+  //   //   foreignKey: 'userId',
+  //   // });
+  //   // 与任务是 一对多
+  //   app.model.User.hasMany(app.model.Article, {
+  //     foreignKey: 'create_user_id',
+  //     targetKey: 'id',
+  //     as: 'create_user_info',
+  //   });
+  //   app.model.User.hasMany(app.model.Article, {
+  //     foreignKey: 'update_user_id',
+  //     targetKey: 'id',
+  //     as: 'update_user_info',
+  //   });
+
+  //   // 与群组是 多对多
+  //   // app.model.Article.belongsToMany(app.model.Groups, {
+  //   //   through: app.model.GroupApp,
+  //   //   foreignKey: 'appId',
+  //   //   otherKey: 'groupId'
+  //   // });
+  // };
+
   return User;
 };

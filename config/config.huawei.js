@@ -18,6 +18,19 @@ module.exports = appInfo => {
     username: 'root',
     password: 'LuJun=940424',
     timezone: '+08:00',
+    logging: function(sql) {
+      // logger为log4js的Logger实例
+      if(process.env.NODE_ENV !== 'production'){
+          console.log('sequelize-sql', sql)
+      }
+    },
+    define: {
+      underscored: true,
+      //使用自定义表名
+      freezeTableName: true,
+      //去掉默认的添加时间和更新时间
+      timestamps: false,
+    },
     dialectOptions: {
       dateStrings: true,
       typeCast(field, next) {
