@@ -25,11 +25,9 @@ module.exports = appInfo => {
       }
     },
     define: {
-      underscored: true,
-      //使用自定义表名
-      freezeTableName: true,
-      //去掉默认的添加时间和更新时间
-      timestamps: false,
+      timestamps: true, //去掉默认的添加时间和更新时间
+      underscored: false,  // 设置为 false 使用驼峰形式
+      freezeTableName: true,  // 不自动将表名转换为复数形式
     },
     dialectOptions: {
       dateStrings: true,

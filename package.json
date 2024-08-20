@@ -3,24 +3,23 @@
   "version": "1.0.0",
   "description": "",
   "dependencies": {
+    "await-stream-ready": "^1.0.1",
     "egg": "^2.5.0",
     "egg-cors": "^3.0.1",
     "egg-jwt": "^3.1.7",
     "egg-scripts": "^2.5.0",
-    "egg-sequelize": "^4.0.2",
+    "egg-sequelize": "^6.0.0",
     "egg-validate": "^2.0.2",
-    "mysql2": "^3.9.9",
+    "image-downloader": "^3.3.0",
+    "mysql2": "^3.11.0",
     "qiniu": "^7.12.0",
     "stream-to-array": "^2.3.0",
-    "stream-wormhole": "^1.0.3",
-    "await-stream-ready": "^1.0.1",
-    "image-downloader": "^3.3.0"
+    "stream-wormhole": "^1.0.3"
   },
   "devDependencies": {
     "autod": "^3.0.1",
     "autod-egg": "^1.0.0",
     "egg-bin": "^4.3.7",
-    "egg-mock": "^3.19.2",
     "eslint": "^4.18.1",
     "eslint-config-egg": "^7.0.0",
     "factory-girl": "^5.0.2",
@@ -32,14 +31,12 @@
   "scripts": {
     "dev": "egg-bin dev --port=8080",
     "dev:huawei": "egg-bin dev --env=huawei --port=8080",
-    "start:amazon": "egg-scripts start --daemon --title=icodeicode-end --env=amazon --port=8080",
-    "start:huawei": "egg-scripts start --daemon --title=icodeicode-end --env=huawei --port=8080",
     "start": "egg-scripts start --daemon --title=icodeicode-end",
+    "start:huawei": "egg-scripts start --daemon --title=icodeicode-end --env=huawei --port=8080",
     "stop": "egg-scripts stop --title=icodeicode-end",
     "sequelize-cli-ts": "node -r ts-node/register ./node_modules/sequelize-cli/lib/sequelize",
     "autod": "autod",
     "lint": "eslint .",
-    "test": "egg-bin test",
     "cov": "egg-bin cov",
     "ci": "npm run lint && NODE_ENV=test npx sequelize db:migrate && npm run cov"
   },
@@ -58,6 +55,6 @@
     "lib",
     "index.js"
   ],
-  "author": "",
+  "author": "lujun",
   "private": true
 }

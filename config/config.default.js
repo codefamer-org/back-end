@@ -12,12 +12,23 @@ module.exports = appInfo => {
   // change to your own sequelize configurations
   config.sequelize = {
     dialect: 'mysql',
-    host: '54.210.95.145',
+    host: '172.0.0.1',
     port: 3306,
     database: 'codefarmer',
     username: 'root',
     password: 'LuJun=940424',
     timezone: '+08:00',
+    logging: function(sql) {
+      // logger为log4js的Logger实例
+      if(process.env.NODE_ENV !== 'production'){
+          console.log('sequelize-sql', sql)
+      }
+    },
+    define: {
+      timestamps: true, //去掉默认的添加时间和更新时间
+      underscored: false,  // 设置为 false 使用驼峰形式
+      freezeTableName: true,  // 不自动将表名转换为复数形式
+    },
     dialectOptions: {
       dateStrings: true,
       typeCast(field, next) {

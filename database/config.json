@@ -3,22 +3,20 @@
     "username": "root",
     "password": "LuJun=940424",
     "database": "codefarmer",
-    "host": "54.210.95.145",
-    "dialect": "mysql",
-    "port": 3306,
-    "timezone": "+08:00"
+    "host": "127.0.0.1",
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": null,
-    "database": "database_test",
+    "password": "LuJun=940424",
+    "database": "codefarmer",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": null,
-    "database": "database_production",
+    "password": "LuJun=940424",
+    "database": "codefarmer",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }
