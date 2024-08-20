@@ -11,7 +11,7 @@ module.exports = app => {
     avatar: { type: STRING },
     age: { type: INTEGER },
     email: { type: STRING, validate: { isEmail: true } },
-    sex: { type: ENUM, values: ['保密', '男', '女'], allowNull: false, defaultValue: '保密' },
+    sex: { type: ENUM, values: ['保密111111111111', '男', '女'], allowNull: false, defaultValue: '保密' },
     is_delete: { type: ENUM, values: ['0', '1'], allowNull: false, defaultValue: '0' },
     createdAt: { type: DATE, defaultValue: NOW },
     createUser: { type: STRING },
