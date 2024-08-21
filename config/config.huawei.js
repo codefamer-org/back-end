@@ -61,10 +61,10 @@ module.exports = appInfo => {
   };
 
   config.jwt = {
-    secret: 'LuJun=940424',
+    secret: '1QAZ2wsx1234',
     enable: true, // default is false
     match: '/jwt', // optional
-    // expiresIn: '24h',
+    expiresIn: '24h',
     // sign: {
     //   // 多少s后过期。actionToken.js中,jwt.sing(plyload,secret,{expiresIn:number})会被合并，调用时设置优先级更高;
     //   // expiresIn: 8 * (60 * 60),

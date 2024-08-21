@@ -9,7 +9,11 @@ module.exports = secret => {
         const data = await ctx.app.jwt.verify(token, secret);
         ctx.helper.injectAppGlobalData('userInfo', data);
       } catch (error) {
-        await ctx.helper.responseSuccessHelper({ msg: 'token已过期，请重新登录', code: 401 });
+        if (error.name === 'JsonWebTokenError') {
+          // ctx.throw(401, 'Unauthorized');
+          ctx.throw(401, 'token已过期，请重新登录');
+          // await ctx.helper.responseSuccessHelper({ msg: 'token已过期，请重新登录', code: 401 });
+        }
       }
       await next();
     } else {
