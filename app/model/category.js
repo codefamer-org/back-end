@@ -1,30 +1,24 @@
 'use strict';
 
+const uuidv4 = require('uuid/v4');
 module.exports = app => {
-  const { STRING, INTEGER, DATE } = app.Sequelize;
-
-  const Category = app.model.define('category', {
-    id: { type: INTEGER, primaryKey: true, autoIncrement: true },
-    label: STRING(255),
-    value: STRING(255),
-    type: { type: STRING(255), default: 'COMMON' },
-    is_delete: INTEGER,
-    create_user: STRING(255),
-    update_user: STRING(255),
-    created_at: DATE,
-    updated_at: DATE,
+  const { STRING, INTEGER, DATE, UUID, ENUM, NOW } = app.Sequelize;
+  const Model = app.model.define('category', {
+    id: { type: UUID, primaryKey: true, allowNull: false, defaultValue: () => uuidv4().replace(/-/g, ''), comment: '主键 用户唯一ID' },
+    label: { type: STRING, comment: '标题' },
+    value: { type: STRING, comment: '值' },
+    type: { type: STRING, comment: '类型' },
+    order: { type: INTEGER, comment: '排序' },
+    isDelete: { type: ENUM, values: ['0', '1'], defaultValue: '0', comment: '是否删除 否-0 是-1' },
+    createdAt: { type: DATE, defaultValue: NOW, comment: '创建时间' },
+    createUserId: { type: STRING, comment: '创建人ID' },
+    updatedAt: { type: DATE, defaultValue: NOW, comment: '更新时间' },
+    updateUserId: { type: STRING, comment: '更新人ID' },
   }, {
-    timestamps: true, // 自动维护时间戳 [ created_at、updated_at ]
-    // 使用自定义表名之后上面写的users就直接就是你的表名，如果不加的话，你就可以写user，但是自己的表名为users，程序会自动将s加上
-    // 禁止修改表名，默认情况下，sequelize将自动将所有传递的模型名称（define的第一个参数）转换为复数
-    // 但是为了安全着想，复数的转换可能会发生变化，所以禁止该行为
-    freezeTableName: true,
-    // timestamps: false, // 去除createAt updateAt
-    // createdAt: false, // 表示不启用created_at
-    // updatedAt: false, // 表示不启用updated_at
-    tableName: 'category', // 自定义的表名，也可以不写，直接用define后面的也可以
-    // 只要你使用了freezeTableName，程序就不会自动给你加上s了
+    tableName: 'category',
+    indexes: [
+      { unique: true, fields: ['id'] },  // 唯一索引
+    ],
   });
-
-  return Category;
+  return Model;
 };
