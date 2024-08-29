@@ -21,6 +21,18 @@
   npm run sequelize-cli-ts db:migrate:undo <migration-file-name>
   // 撤销所有迁移
   npm run sequelize-cli-ts db:migrate:undo:all
+
+
+  // 执行该命令创建model和migration文件
+  npx sequelize model:generate --name UserQQQ1 --attributes email:string,password:string
+
+
+  // 生成初始数据
+  npx sequelize seed:generate --name create-users
+  // 执行上一步向表格中插入数据
+  npx sequelize db:seed:all
+  // 回滚-恢复数据
+  npx sequelize db:seed:undo:all
 ```
 
 ```
